@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PG Connect: find a PG near you</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>PG Connect</h1>
+    <p>Find a PG or hostel within walking distance of where you study or work.</p>
+  </header>
+
+  <main class="layout">
+    <aside class="panel">
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-tab="find">Find a PG</button>
+        <button class="tab" data-tab="add">Add a PG</button>
+        <button class="tab" data-tab="insights">Insights</button>
+      </nav>
+
+      <!-- ============ FIND ============ -->
+      <section id="tab-find" class="tabpane">
+        <div class="field">
+          <label for="college">Search near</label>
+          <select id="college"></select>
+          <div class="row">
+            <button type="button" id="btnLocate" class="ghost">Use my location</button>
+            <span class="hint">or click anywhere on the map</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="radius">Distance: <b id="radiusLabel">2 km</b></label>
+          <input type="range" id="radius" min="0.5" max="10" step="0.5" value="2">
+          <label class="check"><input type="checkbox" id="wholeCity"> Ignore distance, search the whole city</label>
+        </div>
+
+        <div class="grid2">
+          <div class="field">
+            <label for="gender">For</label>
+            <select id="gender">
+              <option value="">Anyone</option>
+              <option value="male">Boys</option>
+              <option value="female">Girls</option>
+              <option value="unisex">Co-living</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="maxRent">Max rent (₹)</label>
+            <input type="number" id="maxRent" placeholder="e.g. 9000" min="0" step="500">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Must have</label>
+          <div class="chips" id="amenityFilters"></div>
+        </div>
+
+        <button id="btnSearch" class="primary">Show PGs</button>
+
+        <p id="resultCount" class="count"></p>
+        <div id="results" class="results"></div>
+      </section>
+
+      <!-- ============ ADD ============ -->
+      <section id="tab-add" class="tabpane" hidden>
+        <form id="addForm">
+          <div class="field"><label for="f_name">PG name</label>
+            <input id="f_name" required placeholder="Sri Sai Boys PG"></div>
+          <div class="grid2">
+            <div class="field"><label for="f_gender">For</label>
+              <select id="f_gender"><option value="male">Boys</option><option value="female">Girls</option><option value="unisex">Co-living</option></select></div>
+            <div class="field"><label for="f_rent">Rent per month (₹)</label>
+              <input id="f_rent" type="number" required min="500" step="100" placeholder="7500"></div>
+          </div>
+          <div class="grid2">
+            <div class="field"><label for="f_area">Area</label>
+              <input id="f_area" required placeholder="Yelahanka"></div>
+            <div class="field"><label for="f_phone">Owner phone</label>
+              <input id="f_phone" placeholder="9876543210"></div>
+          </div>
+          <div class="field"><label for="f_address">Address</label>
+            <input id="f_address" placeholder="2nd Cross, Yelahanka New Town"></div>
+
+          <div class="field"><label>Sharing types</label>
+            <div class="chips" id="f_sharing">
+              <label class="chip"><input type="checkbox" value="1"><span>Single</span></label>
+              <label class="chip"><input type="checkbox" value="2"><span>Double</span></label>
+              <label class="chip"><input type="checkbox" value="3"><span>Triple</span></label>
+            </div>
+          </div>
+          <div class="field"><label>Amenities</label><div class="chips" id="f_amenities"></div></div>
+
+          <div class="field">
+            <label>Location</label>
+            <div class="grid2">
+              <input id="f_lat" type="number" step="any" required placeholder="Latitude">
+              <input id="f_lng" type="number" step="any" required placeholder="Longitude">
+            </div>
+            <div class="row">
+              <button type="button" id="btnUseCenter" class="ghost">Use the pin on the map</button>
+              <span class="hint">Click the map to move the pin first</span>
+            </div>
+          </div>
+          <button class="primary" type="submit">Save PG</button>
+          <p id="addMsg" class="msg"></p>
+        </form>
+      </section>
+
+      <!-- ============ INSIGHTS ============ -->
+      <!-- ============ INSIGHTS ============ -->
+<section id="tab-insights" class="tabpane" hidden>
+
+  <h2>Excel Import & Export</h2>
+
+  <div class="field">
+    <label for="excelFile">Import multiple PGs from Excel (.xlsx)</label>
+    <input type="file" id="excelFile" accept=".xlsx">
+    <button type="button" id="btnImport" class="primary">
+      Import Excel
+    </button>
+    <p id="importMsg" class="msg"></p>
+  </div>
+
+  <div class="field">
+    <label>Export PG listings</label>
+    <button type="button" id="btnExport" class="primary">
+      Download Excel
+    </button>
+    <p id="exportMsg" class="msg"></p>
+    <span class="hint">
+      Exports all listings or listings matching your current search filters.
+    </span>
+  </div>
+
+  <hr>
+
+  <h2>Average rent by area</h2>
+  <div id="chartRent" class="bars"></div>
+
+  <h2>Top rated PGs</h2>
+  <ol id="listTop" class="toplist"></ol>
+
+  <h2>Most common amenities</h2>
+  <div id="chartAmenity" class="bars"></div>
+
+</section>
+        <div id="chartRent" class="bars"></div>
+        <h2>Top rated PGs</h2>
+        <ol id="listTop" class="toplist"></ol>
+        <h2>Most common amenities</h2>
+        <div id="chartAmenity" class="bars"></div>
+      </section>
+    </aside>
+
+    <div id="map" aria-label="Map of PGs"></div>
+  </main>
+
+  <dialog id="detail">
+    <div id="detailBody"></div>
+    <button class="ghost closeBtn" id="btnClose">Close</button>
+  </dialog>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
