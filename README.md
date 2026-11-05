@@ -1,4 +1,4 @@
-<img width="1201" height="957" alt="image" src="https://github.com/user-attachments/assets/7a237f06-3b74-4560-905c-c6dc6072acc8" /># PG Connect – PG & Hostel Finder
+# PG Connect – PG & Hostel Finder
 
 A full-stack web application that helps students and working professionals discover PG accommodations and hostels based on location, budget, gender, and amenities.
 
