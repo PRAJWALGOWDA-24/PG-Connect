@@ -1,4 +1,4 @@
-# PG Connect – PG & Hostel Finder
+<img width="1201" height="957" alt="image" src="https://github.com/user-attachments/assets/7a237f06-3b74-4560-905c-c6dc6072acc8" /># PG Connect – PG & Hostel Finder
 
 A full-stack web application that helps students and working professionals discover PG accommodations and hostels based on location, budget, gender, and amenities.
 
@@ -12,16 +12,20 @@ PG Connect provides location-based search, interactive maps, PG reviews, and bul
 <img width="1783" height="1017" alt="image" src="https://github.com/user-attachments/assets/8764f0a0-d427-42bf-9fc9-bacfd7fce713" />
 
 
-### Nearby PG Locations
-![PG Connect Map](screenshots/map.png)
 
-### Search and Filters
-![PG Connect Search](screenshots/search.png)
+<img width="1571" height="1007" alt="image" src="https://github.com/user-attachments/assets/58e93662-5ab5-450a-9f8b-66bc4553d629" />
 
-### Excel Import and Export
-![PG Connect Excel Import](screenshots/excel-import.png)
+<img width="1385" height="817" alt="image" src="https://github.com/user-attachments/assets/ba93f440-f832-4958-8aa2-aa1801745cd6" />
 
-> Replace these image paths with your actual screenshot filenames.
+
+<img width="1275" height="546" alt="image" src="https://github.com/user-attachments/assets/75d503b8-fd5e-4e9f-885b-4302d6c2462b" />
+
+
+<img width="1201" height="957" alt="image" src="https://github.com/user-attachments/assets/1e017125-b3d2-44df-b3ae-7a789d5f8dd4" />
+
+<img width="1891" height="1132" alt="image" src="https://github.com/user-attachments/assets/eaef565a-cd68-4e54-9536-5707102320d0" />
+
+
 
 ## Features
 
@@ -141,8 +145,9 @@ mvn spring-boot:run
 Visit:
 
 ```text
-http://localhost:8099
+http://localhost:8099    
 ```
+***based on your port number
 
 ## Future Enhancements
 
